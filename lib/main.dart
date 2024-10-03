@@ -9,10 +9,7 @@ import 'home_page.dart';
 
 void main() {
   runApp(
-    BlocProvider(
-      create: (context) => CounterCubit(),
-      child: MyApp(),
-    ),
+    MyApp(),
   );
 }
 
