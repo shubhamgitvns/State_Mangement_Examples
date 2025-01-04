@@ -1,30 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:statemangement_examples/utillitees.dart';
-
-
 
 class SecondPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final CounterController controller = Get.put(CounterController());
+    final counter = context.watch<Counter>(); // Watch for counter changes
 
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Obx(() => Text('Count: ${controller.count}')),
-            ElevatedButton(
-              onPressed: controller.increment,
-              child: Text('Increment'),
+      appBar: AppBar(title: Text("Second Page")),
+      body: Column(
+        children: [
+          Center(
+            child: Text(
+              "Counter Value: ${counter.count}",
+              style: TextStyle(fontSize: 24),
             ),
-          ],
-        ),
+          ),
+          const SizedBox(
+            height: 50,
+          ),
+          ElevatedButton(
+              onPressed: () {
+                context.read<Counter>().decrement();
+              },
+              child: Text("Decrement"))
+        ],
       ),
     );
   }
